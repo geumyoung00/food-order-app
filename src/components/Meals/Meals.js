@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./AvailableMeals.module.css";
+import Counter from "./Counter/Counter";
 
 const Meals = ({ meals }) => {
   return (
@@ -12,6 +13,7 @@ const Meals = ({ meals }) => {
               <p className={classes.desc}>{el.description}</p>
               <p className={classes.price}>{`$ ${el.price}`}</p>
             </div>
+            <Counter />
             <hr />
           </li>
         ))}

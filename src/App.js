@@ -34,8 +34,10 @@ function App() {
   return (
     <div>
       <Header />
-      <MealsSummary />
-      <Meals meals={DUMMY_MEALS} />
+      <main>
+        <MealsSummary />
+        <Meals meals={DUMMY_MEALS} />
+      </main>
     </div>
   );
 }

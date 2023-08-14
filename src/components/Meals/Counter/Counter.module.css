@@ -1,0 +1,14 @@
+.meals_counter {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.meals_counter input {
+  width: 4rem;
+}
+
+.meals_counter button {
+  margin-top: 0.6rem;
+}
