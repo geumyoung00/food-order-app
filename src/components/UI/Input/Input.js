@@ -10,6 +10,8 @@ const Input = (props) => {
         type={props.type}
         id={props.id}
         onChange={props.onChange}
+        min={props.min}
+        max={props.max}
       />
     </div>
   );

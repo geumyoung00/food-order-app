@@ -6,7 +6,14 @@ import Input from "../../UI/Input/Input";
 const Counter = () => {
   return (
     <div className={classes.meals_counter}>
-      <Input id="count" type="number" label="Amount" className="counter" />
+      <Input
+        id="count"
+        type="number"
+        label="Amount"
+        className="counter"
+        min="1"
+        max="5"
+      />
       <Button type="button" className="counter" name="+ Add" />
     </div>
   );
