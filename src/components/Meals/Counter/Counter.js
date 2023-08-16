@@ -11,6 +11,7 @@ const Counter = () => {
         type="number"
         label="Amount"
         className="counter"
+        defaultValue="0"
         min="1"
         max="5"
       />

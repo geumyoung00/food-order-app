@@ -12,6 +12,7 @@ const Input = (props) => {
         onChange={props.onChange}
         min={props.min}
         max={props.max}
+        defaultValue={props.defaultValue}
       />
     </div>
   );
