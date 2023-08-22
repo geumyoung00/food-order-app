@@ -3,6 +3,7 @@ import Header from "./components/Layout/Header";
 import MealsSummary from "./components/Meals/MealsSummary/MealsSummary";
 import Meals from "./components/Meals/Meals";
 import DUMMY_MEALS from "./components/Meals/dummy-meals";
+import Cart from "./components/Carts/Cart";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <MealsSummary />
         <Meals meals={DUMMY_MEALS} />
       </main>
+      <Cart meals={DUMMY_MEALS} />
     </div>
   );
 }
