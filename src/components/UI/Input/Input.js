@@ -13,7 +13,7 @@ const Input = (props) => {
         min={props.min}
         max={props.max}
         defaultValue={props.defaultValue}
-        readonly={props.readonly}
+        readOnly={props.readonly}
       />
     </div>
   );

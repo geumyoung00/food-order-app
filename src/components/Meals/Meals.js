@@ -13,7 +13,7 @@ const Meals = ({ meals }) => {
               <p className={classes.desc}>{el.description}</p>
               <p className={classes.price}>{`$ ${el.price}`}</p>
             </div>
-            <Counter />
+            <Counter item={el} />
             <hr />
           </li>
         ))}
