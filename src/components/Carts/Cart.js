@@ -2,9 +2,12 @@ import React from "react";
 import classes from "../Carts/Cart.module.css";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
+import { createPortal } from "react-dom";
 
-const Cart = ({ meals }) => {
-  return (
+const modalElement = document.getElementById("modal");
+
+const Cart = ({ meals, onHideModal }) => {
+  return createPortal(
     <div className={classes.cart_modal}>
       <div className={classes.cart}>
         <ul>
@@ -34,11 +37,17 @@ const Cart = ({ meals }) => {
           <span>$55.99</span>
         </p>
         <div className={classes.cart_btn}>
-          <Button type="button" className="Cart" name="Close" />
+          <Button
+            type="button"
+            className="Cart"
+            name="Close"
+            onClick={onHideModal}
+          />
           <Button type="button" className="Cart" name="Order" />
         </div>
       </div>
-    </div>
+    </div>,
+    modalElement
   );
 };
 
