@@ -20,4 +20,8 @@
   border-radius: 0.2rem;
   box-sizing: border-box;
   text-indent: 0.3rem;
+  cursor: default;
+}
+.input:focus {
+  outline: none;
 }

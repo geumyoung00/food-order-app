@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "../Carts/Cart.module.css";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import { createPortal } from "react-dom";
+import CartContext from "../../store/cart-context";
 
 const modalElement = document.getElementById("modal");
 
-const Cart = ({ meals, onHideModal }) => {
+const Cart = ({ meals, onHideModal, item }) => {
+  const cartCtx = useContext(CartContext);
+
   return createPortal(
     <div className={classes.cart_modal}>
       <div className={classes.cart}>
