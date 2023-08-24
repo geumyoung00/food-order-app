@@ -6,6 +6,12 @@ const cartReducer = (state, action) => {
     const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount = state.totalAmount + action.item.price;
     return { items: updatedItems, totalAmount: updatedTotalAmount };
+  } else if (action.type === "REMOVE") {
+    const updatedItems = state.items.filter(
+      (state) => state.items !== action.item
+    );
+    const updatedTotalAmount = state.totalAmount - action.item.price;
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
   return { itmes: [], totalAmount: 0 };
 };
@@ -20,11 +26,15 @@ export const CartProvider = ({ children }) => {
     dispatchCart({ type: "ADD", item: item });
   };
 
+  const removeItemHandler = (item) => {
+    dispatchCart({ type: "REMOVE", item: item });
+  };
+
   const value = {
-    items: [],
+    items: cartState.items,
     totalAmount: 0,
     addItem: addItemHandler,
-    removeItem: (id) => {},
+    removeItem: removeItemHandler,
   };
 
   return (
