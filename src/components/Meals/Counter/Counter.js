@@ -14,8 +14,9 @@ const Counter = ({ item }) => {
         type="number"
         label="Amount"
         className="counter"
-        defaultValue="0"
-        min="0"
+        defaultValue="1"
+        onChange={cartCtx.onChange}
+        min="1"
         max="5"
       />
       <Button
