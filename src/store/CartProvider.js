@@ -8,16 +8,14 @@ const cartReducer = (state, action) => {
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
   if (action.type === "REMOVE") {
-    const updatedItems = state.items.filter(
-      (state) => state.items !== action.item
-    );
+    const updatedItems = state.items.filter((item) => {});
     const updatedTotalAmount = state.totalAmount - action.item.price;
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
   if (action.type === "INPUT_CHANGE") {
-    return { val: action.val };
+    return { value: action.val };
   }
-  return { itmes: [], totalAmount: 0 };
+  return { itmes: [], totalAmount: 0, value: 0 };
 };
 
 export const CartProvider = ({ children }) => {
