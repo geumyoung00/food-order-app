@@ -3,9 +3,8 @@ import classes from "./HeaderCartButton.module.css";
 import CartIcon from "./CartIcon";
 import CartContext from "../../../store/cart-context";
 
-const HeaderCartButton = ({ onShowModal }) => {
+const HeaderCartButton = ({ onShowModal, items }) => {
   const cartCtx = useContext(CartContext);
-
   return (
     <button
       className={`${classes.button} ${classes.bump}`}
@@ -15,7 +14,7 @@ const HeaderCartButton = ({ onShowModal }) => {
         <CartIcon />
       </div>
       Your Cart
-      <div className={classes.badge}>{cartCtx.items.length}</div>
+      <div className={classes.badge}>{items?.length ? items.length : 0}</div>
     </button>
   );
 };

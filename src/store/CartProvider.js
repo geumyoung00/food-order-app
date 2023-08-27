@@ -13,20 +13,28 @@ const cartReducer = (state, action) => {
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
   if (action.type === "INPUT_CHANGE") {
-    return { value: action.val };
+    return { val: action.value };
   }
-  return { itmes: [], totalAmount: 0, value: 0 };
+  return { itmes: [], totalAmount: 0, val: 0 };
 };
 
 export const CartProvider = ({ children }) => {
   const [cartState, dispatchCart] = useReducer(cartReducer, {
-    items: [],
+    items: [
+      {
+        name: "",
+        id: "",
+        count: null,
+      },
+    ],
     totalAmount: 0,
-    val: 0,
   });
 
   const addItemHandler = (item) => {
-    dispatchCart({ type: "ADD", item: item });
+    dispatchCart({
+      type: "ADD",
+      item: { name: item.name, id: item.id, count: 99 },
+    });
   };
 
   const removeItemHandler = (item) => {
@@ -34,7 +42,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const inputChangeHandler = (event) => {
-    dispatchCart({ type: "INPUT_CHANGE", val: event.target.value });
+    dispatchCart({ type: "INPUT_CHANGE", value: event.target.value });
   };
 
   const value = {
