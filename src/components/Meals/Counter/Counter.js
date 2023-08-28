@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import classes from "./Counter.module.css";
 import Button from "../../UI/Button/Button";
 import Input from "../../UI/Input/Input";
@@ -16,6 +16,7 @@ const Counter = ({ item }) => {
         className="counter"
         defaultValue="1"
         onChange={cartCtx.onChange}
+        ref={inputRef}
         min="1"
         max="5"
       />
