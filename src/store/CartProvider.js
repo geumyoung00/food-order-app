@@ -6,7 +6,7 @@ const cartReducer = (state, action) => {
     // const updatedItems = state.items.concat(action.item);
     // const updatedTotalAmount = state.totalAmount + action.price;
 
-    console.log(action.item);
+    console.log(action.item.count);
     return { items: action.item, totalAmount: action.price };
   }
   if (action.type === "REMOVE") {
@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
   const addItemHandler = (item) => {
     dispatchCart({
       type: "ADD",
-      item: { name: item.name, id: item.id, count: inputRef.UpdatedCount },
+      item: { name: item.name, id: item.id, count: inputRef.current },
       price: item.price,
     });
   };
@@ -42,10 +42,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const inputChangeHandler = (event) => {
-    // dispatchCart({ type: "INPUT_CHANGE", value: event.target.value });
-    const UpdatedCount = event.target.value;
-    console.log(UpdatedCount);
-    return UpdatedCount;
+    // return dispatchCart({ value: inputRef.current.value });
   };
 
   const value = {

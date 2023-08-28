@@ -16,7 +16,7 @@ const Counter = ({ item }) => {
         className="counter"
         defaultValue="1"
         onChange={cartCtx.onChange}
-        ref={inputRef}
+        ref={cartCtx.ref}
         min="1"
         max="5"
       />
