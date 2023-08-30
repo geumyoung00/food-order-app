@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from '../Carts/Cart.module.css';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import { createPortal } from 'react-dom';
+import cartContext from '../../store/cart-context';
 
 const modalElement = document.getElementById('modal');
 
 const Cart = ({ onHideModal }) => {
-	const cartItems = [
-		{
-			id: 'm1',
-			name: 'Sushi',
-			price: 22.99,
-			count: 3,
-		},
-	];
+	// const cartItems = [
+	// 	{
+	// 		id: 'm1',
+	// 		name: 'Sushi',
+	// 		price: 22.99,
+	// 		count: 3,
+	// 	},
+	// ];
+
+	const ctx = useContext(cartContext);
 
 	return createPortal(
 		<div className={classes.cart_modal}>
 			<div className={classes.cart}>
 				<ul>
-					{cartItems.map((el, id) => (
+					{ctx.items.map((el, id) => (
 						<li className={classes.cart_list} key={id}>
 							<div className={classes.list_count}>
 								<p>{el.name}</p>
