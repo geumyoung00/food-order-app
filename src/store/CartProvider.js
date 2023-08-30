@@ -29,6 +29,25 @@ const cartReducer = (state, action) => {
 			state.totalAmount + action.item.price * action.item.count;
 		return { items: updatedItems, totalAmount: updatedTotalAmount };
 	}
+	if (action.type === 'REMOVE') {
+		// action -> id
+		// state.items=[{sushi, 2}, {burger, 3}]
+		const existingItemIndex = state.items.findIndex(
+			(item) => item.id === action.id
+		);
+		const existingItem = state.items[existingItemIndex]; // { id, name, price, count } OR undefined
+		let updatedItems = [...state.items];
+		if (existingItem.count === 1) {
+			// 1) count가 1인 경우
+			updatedItems = state.items.filter((item) => item.id !== existingItem.id);
+		} else {
+			// 2) count가 1보다 큰 경우
+			const updatedItem = { ...existingItem, count: existingItem.count - 1 };
+			updatedItems[existingItemIndex] = updatedItem;
+		}
+		const updatedTotalAmount = state.totalAmount - existingItem.price;
+		return { items: updatedItems, totalAmount: updatedTotalAmount };
+	}
 	return { itmes: [], totalAmount: 0 };
 };
 
@@ -39,14 +58,18 @@ export const CartProvider = ({ children }) => {
 	});
 
 	const addItemHandler = (item) => {
-		dispatchCart({ type: 'ADD', item: item });
+		dispatchCart({ type: 'ADD', item });
+	};
+
+	const removeItemHandler = (id) => {
+		dispatchCart({ type: 'REMOVE', id });
 	};
 
 	const value = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
 		addItem: addItemHandler,
-		removeItem: (id) => {},
+		removeItem: removeItemHandler,
 	};
 
 	return (

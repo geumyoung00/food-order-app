@@ -8,46 +8,56 @@ import cartContext from '../../store/cart-context';
 const modalElement = document.getElementById('modal');
 
 const Cart = ({ onHideModal }) => {
-	// const cartItems = [
-	// 	{
-	// 		id: 'm1',
-	// 		name: 'Sushi',
-	// 		price: 22.99,
-	// 		count: 3,
-	// 	},
-	// ];
-
 	const ctx = useContext(cartContext);
+
+	const totalAmount = ctx.totalAmount.toFixed(2);
+
+	const addCountHandler = (item) => {
+		ctx.addItem({ ...item, count: 1 });
+	};
+
+	const removeCountHandler = (id) => {
+		ctx.removeItem(id);
+	};
 
 	return createPortal(
 		<div className={classes.cart_modal}>
 			<div className={classes.cart}>
 				<ul>
-					{ctx.items.map((el, id) => (
+					{ctx.items.map((item, id) => (
 						<li className={classes.cart_list} key={id}>
 							<div className={classes.list_count}>
-								<p>{el.name}</p>
+								<p>{item.name}</p>
 								<div className={classes.list_number}>
 									<Input
 										id="count"
-										label={`$${el.price}`}
+										label={`$${item.price}`}
 										type="text"
 										defaultValue={`x 0`}
-										value={`x ${el.count}`}
+										value={`x ${item.count}`}
 										readonly="readonly"
 									/>
 								</div>
 							</div>
 							<div className={classes.list_counter}>
-								<Button id="button" name="-" />
-								<Button id="button" name="+" />
+								<Button
+									id="button"
+									name="-"
+									onClick={() => removeCountHandler(item.id)}
+								/>
+								<Button
+									id="button"
+									name="+"
+									onClick={() => addCountHandler(item)}
+									// onClick={addCountHandler}
+								/>
 							</div>
 						</li>
 					))}
 				</ul>
 				<p className={classes.total_amount}>
 					<strong>Total Amount</strong>
-					<span>$55.99</span>
+					<span>${totalAmount}</span>
 				</p>
 				<div className={classes.cart_btn}>
 					<Button
