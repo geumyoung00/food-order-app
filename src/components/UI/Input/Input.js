@@ -1,7 +1,7 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import classes from "./Input.module.css";
 
-const Input = (props) => {
+const Input = forwardRef((props, ref) => {
   return (
     <div className={classes.input_box}>
       <label htmlFor={props.id}>{props.label}</label>
@@ -13,10 +13,12 @@ const Input = (props) => {
         min={props.min}
         max={props.max}
         defaultValue={props.defaultValue}
+        value={props.value}
         readOnly={props.readonly}
+        ref={ref}
       />
     </div>
   );
-};
+});
 
 export default Input;

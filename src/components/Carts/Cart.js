@@ -6,12 +6,21 @@ import { createPortal } from "react-dom";
 
 const modalElement = document.getElementById("modal");
 
-const Cart = ({ meals, onHideModal }) => {
+const cartItems = [
+  {
+    id: "m1",
+    name: "Sushi",
+    price: 22.99,
+    count: 3,
+  },
+];
+
+const Cart = ({ onHideModal }) => {
   return createPortal(
     <div className={classes.cart_modal}>
       <div className={classes.cart}>
         <ul>
-          {meals.map((el, id) => (
+          {cartItems.map((el, id) => (
             <li className={classes.cart_list} key={id}>
               <div className={classes.list_count}>
                 <p>{el.name}</p>
@@ -20,7 +29,7 @@ const Cart = ({ meals, onHideModal }) => {
                     id="count"
                     label={`$${el.price}`}
                     type="text"
-                    defaultValue={`x 0`}
+                    value={`x ${el.count}`}
                     readonly="readonly"
                   />
                 </div>
