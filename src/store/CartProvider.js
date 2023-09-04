@@ -13,7 +13,7 @@ const cartReducer = (state, action) => {
     // 조건 1.에서 찾은 item을 담을 복제 배열
     let updatedItems = [...state.items];
 
-    if (existingItemIndex) {
+    if (existingItem) {
       // 조건 1.에 부합하는 경우, item에 count만 더 해서 업데이트
       const updatedItem = {
         ...existingItem,
@@ -44,8 +44,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const value = {
-    items: [],
-    totalAmount: 0,
+    items: cartState.items,
+    totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: (id) => {},
   };
