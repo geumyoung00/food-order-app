@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "../Carts/Cart.module.css";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import { createPortal } from "react-dom";
+import cartContext from "../../store/cart-context";
 
 const modalElement = document.getElementById("modal");
 
@@ -16,11 +17,17 @@ const cartItems = [
 ];
 
 const Cart = ({ onHideModal }) => {
+  const ctx = useContext(cartContext);
+  const { items } = ctx;
+
+  const totalAmount = ctx.totalAmount.toFixed(2);
+  // 소숫점 둘째자리까지만 표출하는 걸로 고정.
+
   return createPortal(
     <div className={classes.cart_modal}>
       <div className={classes.cart}>
         <ul>
-          {cartItems.map((el, id) => (
+          {items.map((el, id) => (
             <li className={classes.cart_list} key={id}>
               <div className={classes.list_count}>
                 <p>{el.name}</p>
@@ -43,7 +50,7 @@ const Cart = ({ onHideModal }) => {
         </ul>
         <p className={classes.total_amount}>
           <strong>Total Amount</strong>
-          <span>$55.99</span>
+          <span>{totalAmount}</span>
         </p>
         <div className={classes.cart_btn}>
           <Button
