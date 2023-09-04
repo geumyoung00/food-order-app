@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./HeaderCartButton.module.css";
 import CartIcon from "./CartIcon";
+import cartContext from "../../../store/cart-context";
 
 const HeaderCartButton = ({ onShowModal }) => {
+  const ctx = useContext(cartContext);
+  const { items } = ctx;
+
+  const sumCartCount = items.reduce((acc, currentItem) => {
+    return acc + currentItem.count;
+  }, 0);
+
   return (
     <button
       className={`${classes.button} ${classes.bump}`}
@@ -12,7 +20,7 @@ const HeaderCartButton = ({ onShowModal }) => {
         <CartIcon />
       </div>
       Your Cart
-      <div className={classes.badge}>0</div>
+      <div className={classes.badge}>{sumCartCount}</div>
     </button>
   );
 };
