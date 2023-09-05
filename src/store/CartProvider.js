@@ -28,7 +28,24 @@ const cartReducer = (state, action) => {
       state.totalAmount + action.item.price * action.item.count;
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
-  if (action.tyep === "REMOVE") {
+  if (action.type === "REMOVE") {
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    ); // 해당 item의 indexNumber
+    const existingItem = state.items[existingItemIndex];
+
+    let updatedItems = [...state.items];
+    if (existingItem.count === 1) {
+      updatedItems = state.items.filter((item) => item.id !== existingItem.id);
+    } else {
+      const updatedItem = {
+        ...existingItem,
+        count: existingItem.count - 1,
+      };
+      updatedItems[existingItemIndex] = updatedItem;
+    }
+    const updatedTotalAmount = state.totalAmount - existingItem.price;
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
   return { itmes: [], totalAmount: 0 };
 };
@@ -43,11 +60,15 @@ export const CartProvider = ({ children }) => {
     dispatchCart({ type: "ADD", item: item });
   };
 
+  const removeItemHandler = (id) => {
+    dispatchCart({ type: "REMOVE", id: id });
+  };
+
   const value = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
-    removeItem: (id) => {},
+    removeItem: removeItemHandler,
   };
 
   return (

@@ -7,50 +7,57 @@ import cartContext from "../../store/cart-context";
 
 const modalElement = document.getElementById("modal");
 
-const cartItems = [
-  {
-    id: "m1",
-    name: "Sushi",
-    price: 22.99,
-    count: 3,
-  },
-];
-
 const Cart = ({ onHideModal }) => {
   const ctx = useContext(cartContext);
   const { items } = ctx;
 
   const totalAmount = ctx.totalAmount.toFixed(2);
   // 소숫점 둘째자리까지만 표출하는 걸로 고정.
+  const addCountHandler = (item) => {
+    ctx.addItem({ ...item, count: 1 });
+    // 1씩 더해지기 때문에 고정값 1을 준다. (counter에서는 inputRef.current.value로 입력값을 가지게 함)
+  };
+
+  const removeCountHandler = (id) => {
+    ctx.removeItem(id);
+  };
 
   return createPortal(
     <div className={classes.cart_modal}>
       <div className={classes.cart}>
         <ul>
-          {items.map((el, id) => (
+          {items.map((item, id) => (
             <li className={classes.cart_list} key={id}>
               <div className={classes.list_count}>
-                <p>{el.name}</p>
+                <p>{item.name}</p>
                 <div className={classes.list_number}>
                   <Input
                     id="count"
-                    label={`$${el.price}`}
+                    label={`$${item.price}`}
                     type="text"
-                    value={`x ${el.count}`}
+                    value={`x ${item.count}`}
                     readonly="readonly"
                   />
                 </div>
               </div>
               <div className={classes.list_counter}>
-                <Button id="button" name="-" />
-                <Button id="button" name="+" />
+                <Button
+                  id="button"
+                  name="-"
+                  onClick={() => removeCountHandler(item.id)}
+                />
+                <Button
+                  id="button"
+                  name="+"
+                  onClick={() => addCountHandler(item)}
+                />
               </div>
             </li>
           ))}
         </ul>
         <p className={classes.total_amount}>
           <strong>Total Amount</strong>
-          <span>{totalAmount}</span>
+          <span>{`$ ${totalAmount}`}</span>
         </p>
         <div className={classes.cart_btn}>
           <Button
