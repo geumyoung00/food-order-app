@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useCallback } from "react";
 import classes from "./Counter.module.css";
 import Button from "../../UI/Button/Button";
 import Input from "../../UI/Input/Input";
@@ -8,23 +8,26 @@ const Counter = ({ item }) => {
   const inputRef = useRef();
   const ctx = useContext(CartContext);
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    const count = +inputRef.current.value;
+      const count = +inputRef.current.value;
 
-    ctx.addItem({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      count: count,
-    });
-  };
+      ctx.addItem({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        count: count,
+      });
+    },
+    [ctx.count]
+  );
 
   return (
     <form className={classes.meals_counter} onSubmit={submitHandler}>
       <Input
-        id="count"
+        id={`count ${ctx.items.id}`}
         type="number"
         label="Amount"
         className="counter"

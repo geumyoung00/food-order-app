@@ -11,6 +11,8 @@ const HeaderCartButton = ({ onShowModal }) => {
     return acc + currentItem.count;
   }, 0);
 
+  console.log("HeaderCartButton 실행 중");
+
   return (
     <button
       className={`${classes.button} ${classes.bump}`}

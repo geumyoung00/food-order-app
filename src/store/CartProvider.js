@@ -1,4 +1,4 @@
-import React, { Children, useReducer } from "react";
+import React, { Children, useCallback, useReducer } from "react";
 import CartContext from "./cart-context";
 
 const cartReducer = (state, action) => {
@@ -56,13 +56,19 @@ export const CartProvider = ({ children }) => {
     totalAmount: 0,
   });
 
-  const addItemHandler = (item) => {
-    dispatchCart({ type: "ADD", item: item });
-  };
+  const addItemHandler = useCallback(
+    (item) => {
+      dispatchCart({ type: "ADD", item: item });
+    },
+    [cartState]
+  );
 
-  const removeItemHandler = (id) => {
-    dispatchCart({ type: "REMOVE", id: id });
-  };
+  const removeItemHandler = useCallback(
+    (id) => {
+      dispatchCart({ type: "REMOVE", id: id });
+    },
+    [cartState]
+  );
 
   const value = {
     items: cartState.items,

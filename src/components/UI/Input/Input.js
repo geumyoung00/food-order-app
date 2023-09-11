@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import classes from "./Input.module.css";
 
 const Input = forwardRef((props, ref) => {
+  console.log("typing 중");
   return (
     <div className={classes.input_box}>
       <label htmlFor={props.id}>{props.label}</label>
@@ -21,4 +22,4 @@ const Input = forwardRef((props, ref) => {
   );
 });
 
-export default Input;
+export default React.memo(Input);

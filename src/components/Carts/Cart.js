@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import classes from "../Carts/Cart.module.css";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
@@ -13,14 +13,20 @@ const Cart = ({ onHideModal }) => {
 
   const totalAmount = ctx.totalAmount.toFixed(2);
   // 소숫점 둘째자리까지만 표출하는 걸로 고정.
-  const addCountHandler = (item) => {
-    ctx.addItem({ ...item, count: 1 });
-    // 1씩 더해지기 때문에 고정값 1을 준다. (counter에서는 inputRef.current.value로 입력값을 가지게 함)
-  };
+  const addCountHandler = useCallback(
+    (item) => {
+      ctx.addItem({ ...item, count: 1 });
+      // 1씩 더해지기 때문에 고정값 1을 준다. (counter에서는 inputRef.current.value로 입력값을 가지게 함)
+    },
+    [ctx.count]
+  );
 
-  const removeCountHandler = (id) => {
-    ctx.removeItem(id);
-  };
+  const removeCountHandler = useCallback(
+    (id) => {
+      ctx.removeItem(id);
+    },
+    [ctx.count]
+  );
 
   return createPortal(
     <div className={classes.cart_modal}>
