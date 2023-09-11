@@ -3,6 +3,7 @@ import classes from "./AvailableMeals.module.css";
 import Counter from "./Counter/Counter";
 
 const Meals = ({ meals }) => {
+  console.log("Meals 로딩");
   return (
     <div className={classes.meals}>
       <ul>
@@ -22,4 +23,4 @@ const Meals = ({ meals }) => {
   );
 };
 
-export default Meals;
+export default React.memo(Meals);

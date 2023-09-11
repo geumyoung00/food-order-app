@@ -1,6 +1,8 @@
+import React from "react";
 import classes from "./MealsSummary.module.css";
 
 const MealsSummary = () => {
+  console.log("MealsSummary 로딩");
   return (
     <section className={classes.summary}>
       <h2>Delicious Food, Delivered To You</h2>
@@ -16,4 +18,4 @@ const MealsSummary = () => {
   );
 };
 
-export default MealsSummary;
+export default React.memo(MealsSummary);
